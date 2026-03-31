@@ -28,6 +28,8 @@ def _term_width() -> int:
     return shutil.get_terminal_size(fallback=(80, 24)).columns
 
 
+# Load .env from repo root first, then my_agent/ as fallback (or override)
+dotenv.load_dotenv(dotenv_path=pathlib.Path(".env"))
 dotenv.load_dotenv(dotenv_path=pathlib.Path("my_agent/.env"))
 
 
