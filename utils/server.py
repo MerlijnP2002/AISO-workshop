@@ -21,7 +21,7 @@ class ADKAgentRunner:
 
     def __init__(
         self,
-        base_url: str = "http://localhost:8080",
+        base_url: str = "http://localhost:8000",
         agent_name: str = "my_agent",
         user_id: str = "dev_user",
     ):
@@ -55,7 +55,7 @@ class ADKAgentRunner:
         print("Starting ADK API server...")
         # Start the server in the background
         self.server_process = subprocess.Popen(
-            [".venv/bin/adk", "api_server", "--host", "127.0.0.1", "--port", "8080", "."],
+            [".venv/bin/adk", "api_server", "--host", "127.0.0.1", "--port", "8000", "."],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             cwd=os.getcwd(),
