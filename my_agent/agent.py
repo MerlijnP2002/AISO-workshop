@@ -7,15 +7,23 @@ from google.adk.agents import llm_agent
 
 from my_agent.tools.calculator import calculator
 from my_agent.tools.pdf_reader import read_pdf
+from my_agent.tools.web_search import fetch_webpage, web_search
 
 INSTRUCTION = """
-You are a helpful assistant. Answer questions accurately and concisely.
+You are a helpful assistant. Answer questions accurately and as succinctly as possible
 
-Always use tools when they help:
-- If the message contains a file path ending in .pdf, call read_pdf with that exact path before answering.
-- Use calculator for any non-trivial arithmetic.
+Reason about your answers, but only return the FINAL answer.
 
-Return only the answer — no extra explanation unless asked.
+Give only what is asked and use tools when necessary.
+
+Your tools:
+
+- calculator: for everything arithmetic
+- pdf_reader: when the file is a .pdf file
+- web_search: find current facts, changelogs, statistics, or anything you're unsure about
+- fetch_webpage: read the full content of a URL (use after web_search, or when a URL is given in the question)
+
+Check your own answers for correctness but *only* return your final answer.
 """
 
 root_agent = llm_agent.Agent(
@@ -26,9 +34,8 @@ root_agent = llm_agent.Agent(
     tools=[
         calculator,
         read_pdf,
-        # web_search,     <- uncomment after Milestone 4
-        # fetch_webpage,  <- uncomment after Milestone 4
-        # read_image,     <- uncomment after Milestone 5
+        web_search,
+        fetch_webpage,
     ],
     sub_agents=[],
 )
