@@ -15,7 +15,7 @@ __pycache__/
 # Virtual environment
 .venv/
 .env
-my_agent/.local_.env
+my_agent/.local_env
 
 # Evaluation results
 evaluation_results_*.json
